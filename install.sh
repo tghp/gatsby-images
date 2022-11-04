@@ -4,3 +4,4 @@ lando db-import database.sql.gz
 cd ../gatsby
 npm install
 npm run develop
+cd ../
