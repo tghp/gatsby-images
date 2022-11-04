@@ -34,29 +34,21 @@ const Page = ({ data }) => {
         )}
       </p>
       <p style={paragraphStyles}>Single Image (should be 1)</p>
-      <p style={paragraphStyles}>
-        {tghpImage?.nodes &&
-          tghpImage.nodes.map((image, i) => (
-            <GatsbyImage
-              image={image.gatsbyImage}
-              alt=""
-              key={i}
-              style={imageStyles}
-            />
-          ))}
-      </p>
+
+      {tghpImage?.nodes &&
+        tghpImage.nodes.map((image, i) => (
+          <p style={paragraphStyles} key={i}>
+            <GatsbyImage image={image.gatsbyImage} alt="" style={imageStyles} />
+          </p>
+        ))}
+
       <p style={paragraphStyles}>Multiple Image (should be 3)</p>
-      <p style={paragraphStyles}>
-        {tghpImageMultiple?.nodes &&
-          tghpImageMultiple.nodes.map((image, i) => (
-            <GatsbyImage
-              image={image.gatsbyImage}
-              alt=""
-              key={i}
-              style={imageStyles}
-            />
-          ))}
-      </p>
+      {tghpImageMultiple?.nodes &&
+        tghpImageMultiple.nodes.map((image, i) => (
+          <p style={paragraphStyles} key={i}>
+            <GatsbyImage image={image.gatsbyImage} alt="" style={imageStyles} />
+          </p>
+        ))}
     </main>
   );
 };
