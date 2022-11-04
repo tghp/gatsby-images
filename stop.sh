@@ -1,0 +1,2 @@
+cd wordpress
+lando stop

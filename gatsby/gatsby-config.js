@@ -6,7 +6,7 @@ module.exports = {
   plugins: [{
     resolve: 'gatsby-source-wordpress',
     options: {
-      "url": 'http://gatsbyimage.lndo.site/graphql/'
+      "url": process.env.WP_GRAPHQL_URL || 'http://gatsbyimage.lndo.site/graphql'
     }
   }, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", {
     resolve: 'gatsby-source-filesystem',
