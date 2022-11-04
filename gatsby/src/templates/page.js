@@ -18,7 +18,12 @@ const imageStyles = {
 
 const Page = ({ data }) => {
   const {
-    page: { featuredImage, tghpImage, tghpImageMultiple },
+    page: {
+      featuredImage,
+      tghpImage,
+      tghpImageMultiple,
+      tghpReallyLongContent,
+    },
   } = data;
 
   return (
@@ -47,6 +52,9 @@ const Page = ({ data }) => {
             <GatsbyImage image={image.gatsbyImage} alt="" style={imageStyles} />
           </p>
         ))}
+      {tghpReallyLongContent && (
+        <div dangerouslySetInnerHTML={{ __html: tghpReallyLongContent }} />
+      )}
     </main>
   );
 };
@@ -58,6 +66,7 @@ export const query = graphql`
     page: wpPage(slug: { eq: $slug }) {
       slug
       title
+      tghpReallyLongContent
 
       featuredImage {
         node {

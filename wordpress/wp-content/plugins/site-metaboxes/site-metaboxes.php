@@ -24,6 +24,11 @@ add_action('init', function () {
                     'name' => 'Images',
                     'type' => 'image_advanced',
                 ],
+                [
+                    'id' => 'tghpReallyLongContent',
+                    'name' => 'Really Long Content',
+                    'type' => 'wysiwyg',
+                ],
             ],
         ];
 
