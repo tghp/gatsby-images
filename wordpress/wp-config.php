@@ -33,6 +33,15 @@ if (getenv('LANDO_INFO')) {
     define('DB_PASSWORD', $database_config->creds->password);
     /** MySQL hostname */
     define('DB_HOST', $database_config->internal_connection->host);
+} else {
+    /** The name of the database for WordPress */
+    define('DB_NAME', 'wordpress');
+    /** MySQL database username */
+    define('DB_USER', 'admin');
+    /** MySQL database password */
+    define('DB_PASSWORD', 'password');
+    /** MySQL hostname */
+    define('DB_HOST', 'localhost');
 }
 
 /** Database charset to use in creating database tables. */
