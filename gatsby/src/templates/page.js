@@ -18,10 +18,8 @@ const imageStyles = {
 
 const Page = ({ data }) => {
   const {
-    page: { title, featuredImage, tghpImage, tghpImageMultiple },
+    page: { featuredImage, tghpImage, tghpImageMultiple },
   } = data;
-
-  console.log(data);
 
   return (
     <main style={pageStyles}>
