@@ -12,6 +12,7 @@ define('WP_GATSBY_TGHP_PLUGIN_NAME', 'wp-gatsby-tghp');
 define('WP_GATSBY_TGHP_PLUGIN_PATH', dirname(__FILE__));
 define('WP_GATSBY_TGHP_PLUGIN_URL', untrailingslashit(plugins_url('/', __FILE__)));
 
+require __DIR__ . '/vendor/autoload.php';
 
 // Exit if accessed directly.
 if (! defined('ABSPATH') ) {

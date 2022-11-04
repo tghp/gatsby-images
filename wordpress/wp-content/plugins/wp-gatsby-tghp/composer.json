@@ -6,5 +6,10 @@
     "illuminate/database": "^5.4",
     "illuminate/pagination": "^5.4",
     "jimmiw/php-time-ago": "^3.2.4"
+  },
+  "config": {
+    "allow-plugins": {
+      "kylekatarnls/update-helper": true
+    }
   }
 }
