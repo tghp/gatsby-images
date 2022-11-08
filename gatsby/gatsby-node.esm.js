@@ -1,7 +1,15 @@
 import path from 'path';
+import Redis from 'ioredis';
 
 export const createPages = async ({ graphql, actions }) => {
-  const { createPage, createRedirect } = actions;
+  // console.log(process.env.REDIS_CONNECTION_STRING);
+
+  const redisClient = new Redis(
+    `redis://${process.env.REDIS_CONNECTION_STRING}`,
+  );
+  const testIteration = await redisClient.get('testIteration');
+
+  const { createPage } = actions;
 
   /*
    * Create page pages
@@ -29,7 +37,7 @@ export const createPages = async ({ graphql, actions }) => {
       createPage({
         path: `/${slug}/`,
         component: path.resolve(`./src/templates/page.js`),
-        context: { slug },
+        context: { slug, testIteration },
       });
     });
   }

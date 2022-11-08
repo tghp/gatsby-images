@@ -16,7 +16,7 @@ const imageStyles = {
   width: '500px',
 };
 
-const Page = ({ data }) => {
+const Page = ({ data, pageContext }) => {
   const {
     page: {
       featuredImage,
@@ -26,8 +26,13 @@ const Page = ({ data }) => {
     },
   } = data;
 
+  const { testIteration } = pageContext;
+
   return (
     <main style={pageStyles}>
+      <h1 data-test-iteration={testIteration}>
+        Test Iteration: {testIteration}
+      </h1>
       <p style={paragraphStyles}>Featured Image (should be 1)</p>
       <p style={paragraphStyles}>
         {featuredImage?.node && (
