@@ -8,6 +8,8 @@ export const storeIteration = async (code) => {
 }
 
 export const checkIfIterationLive = async (code, callbacks = {}) => {
+  let checkedUrls = [];
+
   for (const slug of process.env.GATSBY_TEST_SLUGS.split(',')) {
     const response = await fetch(`${process.env.GATSBY_URL}${slug}`);
     const html = await response.text();
@@ -25,7 +27,10 @@ export const checkIfIterationLive = async (code, callbacks = {}) => {
       throw new Error('No image paths found');
     }
 
-    const imageUrls = uniq(imagePaths).map(path => `${process.env.GATSBY_URL}${path.replace(/^\//, '')}`);
+    const imageUrls = uniq(imagePaths).map(path => `${process.env.GATSBY_URL}${path.replace(/^\//, '')}`)
+      .filter(url => !checkedUrls.includes(url));
+
+    checkedUrls = [...checkedUrls, ...imageUrls];
 
     callbacks.onFoundImages && callbacks.onFoundImages(imageUrls.length);
 
