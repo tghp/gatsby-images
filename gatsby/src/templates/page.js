@@ -24,7 +24,10 @@ const Page = ({ data, pageContext }) => {
       tghpImageMultiple,
       tghpReallyLongContent,
     },
+    terms,
   } = data;
+
+  console.log(terms);
 
   const { testIteration } = pageContext;
 
@@ -57,6 +60,19 @@ const Page = ({ data, pageContext }) => {
             <GatsbyImage image={image.gatsbyImage} alt="" style={imageStyles} />
           </p>
         ))}
+      <p style={paragraphStyles}>Term Images (should be 3)</p>
+      {terms?.nodes &&
+        terms.nodes.map((term, i) =>
+          term?.tghpFeaturedImage?.nodes ? (
+            <p style={paragraphStyles} key={i}>
+              <GatsbyImage
+                image={term.tghpFeaturedImage.nodes[0].gatsbyImage}
+                alt=""
+                style={imageStyles}
+              />
+            </p>
+          ) : null,
+        )}
       {tghpReallyLongContent && (
         <div dangerouslySetInnerHTML={{ __html: tghpReallyLongContent }} />
       )}
@@ -88,6 +104,17 @@ export const query = graphql`
       tghpImageMultiple {
         nodes {
           gatsbyImage(layout: FULL_WIDTH, width: 600, placeholder: NONE)
+        }
+      }
+    }
+
+    terms: allWpTghpCustomtax {
+      nodes {
+        name
+        tghpFeaturedImage {
+          nodes {
+            gatsbyImage(layout: FULL_WIDTH, width: 600, placeholder: NONE)
+          }
         }
       }
     }
