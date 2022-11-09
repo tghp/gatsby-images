@@ -12,9 +12,9 @@ export const checkIfIterationLive = async (code, callbacks = {}) => {
     const response = await fetch(`${process.env.GATSBY_URL}${slug}`);
     const html = await response.text();
 
-    // if (!html.includes(code)) {
-    //   return false;
-    // }
+    if (!html.includes(code)) {
+      return false;
+    }
 
     callbacks.onHasCodeCheckingImagesAtSlug && callbacks.onHasCodeCheckingImagesAtSlug(slug);
 

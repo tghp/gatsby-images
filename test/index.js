@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import { generateSlug } from 'random-word-slugs';
 import { setTimeout } from 'timers/promises';
+import fetch from 'node-fetch';
 import pino from 'pino';
 import * as colorette from 'colorette';
 import logSymbols from 'log-symbols';
@@ -39,12 +40,13 @@ const runSlug = generateSlug();
 const runLogPrefix = colorette.gray(`[run: ${runSlug}]`);
 logger.info(`${runLogPrefix} Starting test run ${runSlug}`);
 
+let interationIndex = 1;
 while (true) {
   // Start a new test run iteration
   let iterationComplete = false;
   while (!iterationComplete) {
     const iterationSlug = generateSlug();
-    const iterationLogPrefix = colorette.gray(`${runLogPrefix}[iteration: ${iterationSlug}]`);
+    const iterationLogPrefix = colorette.gray(`${runLogPrefix}[iteration ${interationIndex}: ${iterationSlug}]`);
     logger.info(`${iterationLogPrefix} Starting test iteration ${iterationSlug}`);
 
     // Store the iteration code in Redis
@@ -65,7 +67,7 @@ while (true) {
     );
 
     // If the webhook failed, trigger an error as something is probably broken
-    if (webhookTriggerResponse.status !== 200) {
+    if (webhookTriggerResponse.status < 200 || webhookTriggerResponse.status > 299) {
       logger.error(`${iterationLogPrefix} Webhook trigger failed with status ${webhookTriggerResponse.status}`);
       process.exit(1);
     }
@@ -105,5 +107,6 @@ while (true) {
     }
 
     iterationComplete = true;
+    interationIndex++;
   }
 }
